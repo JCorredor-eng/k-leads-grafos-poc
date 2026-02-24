@@ -99,13 +99,22 @@ export default function NetworkGraph({ data }: { data: NetworkGraphData }) {
           const node = nodeMap[id];
           if (node) matchedSubnets.add(node.ip_subnet_48);
         }
+        // Also include subnets of direct neighbors so all edges are visible
+        for (const edge of data.edges) {
+          if (matched.has(edge.source) || matched.has(edge.target)) {
+            const src = nodeMap[edge.source];
+            const tgt = nodeMap[edge.target];
+            if (src) matchedSubnets.add(src.ip_subnet_48);
+            if (tgt) matchedSubnets.add(tgt.ip_subnet_48);
+          }
+        }
         return matchedSubnets;
       });
     } else if (!matched && preSearchSubnetsRef.current) {
       setActiveSubnets(preSearchSubnetsRef.current);
       preSearchSubnetsRef.current = null;
     }
-  }, [data.nodes, nodeMap]);
+  }, [data.nodes, data.edges, nodeMap]);
 
   // Filtered data
   const { visibleNodes, visibleEdges } = useMemo(() => {
