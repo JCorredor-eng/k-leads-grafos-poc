@@ -1,4 +1,5 @@
 import Graph from "graphology";
+import forceAtlas2 from "graphology-layout-forceatlas2";
 import type {
   GraphInputData,
   GraphVisualConfig,
@@ -104,6 +105,22 @@ export function buildGraph(
       // Logarithmic scaling: more connections → bigger, but with diminishing returns
       const t = deg > 0 ? Math.log2(deg + 1) / Math.log2(maxDeg + 1) : 0;
       graph.setNodeAttribute(nodeKey, "size", base + t * (max - base));
+    });
+  }
+
+  // Pre-compute ForceAtlas2 layout synchronously so nodes appear settled on first render
+  if (config.layout.type === "forceatlas2" && graph.order > 0) {
+    const fa2Config = config.layout.fa2 ?? {};
+    forceAtlas2.assign(graph, {
+      iterations: 150,
+      settings: {
+        gravity: fa2Config.gravity ?? 1,
+        scalingRatio: fa2Config.scalingRatio ?? 2,
+        strongGravityMode: fa2Config.strongGravityMode ?? false,
+        barnesHutOptimize: fa2Config.barnesHutOptimize ?? true,
+        barnesHutTheta: 0.5,
+        slowDown: 5,
+      },
     });
   }
 

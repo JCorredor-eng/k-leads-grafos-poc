@@ -11,7 +11,6 @@ import useGraphLookups from "@/app/components/shared/hooks/useGraphLookups";
 import useGraphFilters from "@/app/components/shared/hooks/useGraphFilters";
 import { SIGMA_SETTINGS } from "./lib/constants";
 import GraphLoader from "./hooks/GraphLoader";
-import ForceAtlasLayout from "./hooks/ForceAtlasLayout";
 import GraphInteractions from "./hooks/GraphInteractions";
 import GraphControls from "./ui/GraphControls";
 import GraphHeader from "@/app/components/shared/ui/GraphHeader";
@@ -81,9 +80,6 @@ export default function SigmaGraphInner({
         }}
       >
         <GraphLoader data={data} config={config} />
-        {config.layout.type === "forceatlas2" && (
-          <ForceAtlasLayout config={config.layout} />
-        )}
         <GraphInteractions
           callbacks={callbacks}
           activeSubnets={activeSubnets}
