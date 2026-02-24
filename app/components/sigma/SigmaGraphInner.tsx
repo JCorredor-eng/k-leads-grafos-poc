@@ -25,12 +25,14 @@ interface SigmaGraphInnerProps {
   data: GraphInputData;
   config: GraphVisualConfig;
   rawData: NetworkGraphData;
+  datasetLabel: string;
 }
 
 export default function SigmaGraphInner({
   data,
   config,
   rawData,
+  datasetLabel,
 }: SigmaGraphInnerProps) {
   const { selectedNode, setSelectedNode, hoveredNode, setHoveredNode, hoveredEdge, setHoveredEdge, mousePos, setMousePos } = useGraphInteraction();
   const { nodeMap, edgeMap } = useGraphLookups(rawData.nodes, rawData.edges);
@@ -95,6 +97,7 @@ export default function SigmaGraphInner({
       <GraphHeader
         alarmContext={rawData.metadata.alarm_context}
         totalNodes={rawData.metadata.total_nodes}
+        datasetLabel={datasetLabel}
       />
 
       <SubnetFilters

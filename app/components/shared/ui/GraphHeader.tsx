@@ -5,9 +5,10 @@ import { formatAlarmWindow } from "../lib/helpers";
 interface GraphHeaderProps {
   alarmContext: AlarmContext;
   totalNodes: number;
+  datasetLabel: string;
 }
 
-export default function GraphHeader({ alarmContext, totalNodes }: GraphHeaderProps) {
+export default function GraphHeader({ alarmContext, totalNodes, datasetLabel }: GraphHeaderProps) {
   const severityEntries = Object.entries(alarmContext.severity_distribution);
   const alarmWindow = formatAlarmWindow(alarmContext.window_start, alarmContext.window_end);
 
@@ -24,7 +25,7 @@ export default function GraphHeader({ alarmContext, totalNodes }: GraphHeaderPro
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
           <div style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--klabs-accent)", boxShadow: "0 0 8px hsl(23 90% 54% / 0.4)" }} />
           <span style={{ color: "var(--text-primary)", fontSize: 13, fontWeight: 700, letterSpacing: "0.02em" }}>
-            5G RAN Network Graph
+            {datasetLabel} Graph
           </span>
         </div>
         <span style={{ color: "var(--border-strong)", fontSize: 11 }}>|</span>

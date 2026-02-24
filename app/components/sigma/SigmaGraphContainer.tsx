@@ -17,12 +17,14 @@ interface SigmaGraphContainerProps {
   data: GraphInputData;
   config: GraphVisualConfig;
   rawData: NetworkGraphData;
+  datasetLabel: string;
 }
 
 export default function SigmaGraphContainer({
   data,
   config,
   rawData,
+  datasetLabel,
 }: SigmaGraphContainerProps) {
-  return <SigmaGraphInner data={data} config={config} rawData={rawData} />;
+  return <SigmaGraphInner data={data} config={config} rawData={rawData} datasetLabel={datasetLabel} />;
 }

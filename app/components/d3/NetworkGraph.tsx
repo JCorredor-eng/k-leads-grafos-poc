@@ -15,7 +15,7 @@ import NodeTooltip from "@/app/components/shared/ui/NodeTooltip";
 import EdgeTooltip from "@/app/components/shared/ui/EdgeTooltip";
 import DetailPanel from "@/app/components/shared/ui/DetailPanel";
 
-export default function NetworkGraph({ data }: { data: NetworkGraphData }) {
+export default function NetworkGraph({ data, datasetLabel }: { data: NetworkGraphData; datasetLabel: string }) {
   const svgRef = useRef<SVGSVGElement>(null);
   const dimensions = useResizeObserver(svgRef);
 
@@ -65,7 +65,7 @@ export default function NetworkGraph({ data }: { data: NetworkGraphData }) {
         fontFamily: "var(--font-sora, 'Sora', sans-serif)",
       }}
     >
-      <GraphHeader alarmContext={data.metadata.alarm_context} totalNodes={data.metadata.total_nodes} />
+      <GraphHeader alarmContext={data.metadata.alarm_context} totalNodes={data.metadata.total_nodes} datasetLabel={datasetLabel} />
 
       <SubnetFilters
         subnetKeys={subnetKeys}

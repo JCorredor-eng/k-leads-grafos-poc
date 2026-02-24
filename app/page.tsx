@@ -34,6 +34,11 @@ export default function Home() {
     return DATASETS.find((d) => d.id === dsId)?.data ?? sampleNetworkGraph;
   };
 
+  const getLabelForTab = (tabId: TabId): string => {
+    const dsId = selectedDataset[tabId];
+    return DATASETS.find((d) => d.id === dsId)?.label ?? "Network";
+  };
+
   const sigmaData = useMemo(() => {
     const adapter = new GnbTopologyAdapter();
     const raw = getDataForTab("sigma");
@@ -109,6 +114,7 @@ export default function Home() {
           <NetworkGraph
             key={selectedDataset.d3}
             data={getDataForTab("d3")}
+            datasetLabel={getLabelForTab("d3")}
           />
         )}
         {activeTab === "sigma" && (
@@ -117,6 +123,7 @@ export default function Home() {
             data={sigmaData.data}
             config={sigmaData.config}
             rawData={getDataForTab("sigma")}
+            datasetLabel={getLabelForTab("sigma")}
           />
         )}
       </div>
