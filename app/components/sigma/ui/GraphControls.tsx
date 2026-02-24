@@ -21,29 +21,21 @@ export default function GraphControls() {
     camera.animatedReset({ duration: 300 });
   }, [sigma]);
 
+  const btnStyle: React.CSSProperties = {
+    display: "flex", alignItems: "center", justifyContent: "center",
+    width: 32, height: 32, borderRadius: 8,
+    background: "var(--surface-glass)", backdropFilter: "blur(16px) saturate(180%)",
+    WebkitBackdropFilter: "blur(16px) saturate(180%)",
+    border: "1px solid var(--border)", color: "var(--text-secondary)",
+    cursor: "pointer", transition: "all 0.15s", fontSize: 16,
+    boxShadow: "var(--panel-shadow)",
+  };
+
   return (
-    <div className="absolute bottom-4 right-4 flex flex-col gap-1">
-      <button
-        onClick={zoomIn}
-        className="flex h-8 w-8 items-center justify-center rounded bg-zinc-800 text-zinc-200 transition-colors hover:bg-zinc-700"
-        title="Zoom in"
-      >
-        +
-      </button>
-      <button
-        onClick={zoomOut}
-        className="flex h-8 w-8 items-center justify-center rounded bg-zinc-800 text-zinc-200 transition-colors hover:bg-zinc-700"
-        title="Zoom out"
-      >
-        -
-      </button>
-      <button
-        onClick={resetView}
-        className="flex h-8 w-8 items-center justify-center rounded bg-zinc-800 text-zinc-200 transition-colors hover:bg-zinc-700 text-xs"
-        title="Reset view"
-      >
-        R
-      </button>
+    <div style={{ position: "absolute", bottom: 16, right: 16, display: "flex", flexDirection: "column", gap: 4 }}>
+      <button onClick={zoomIn} style={btnStyle} title="Zoom in">+</button>
+      <button onClick={zoomOut} style={btnStyle} title="Zoom out">-</button>
+      <button onClick={resetView} style={{ ...btnStyle, fontSize: 12 }} title="Reset view">R</button>
     </div>
   );
 }

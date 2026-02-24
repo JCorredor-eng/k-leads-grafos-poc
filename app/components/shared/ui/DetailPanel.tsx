@@ -7,8 +7,8 @@ function Section({ title, children }: { title: string; children: React.ReactNode
       <div
         style={{
           fontSize: 10, fontWeight: 700, textTransform: "uppercase",
-          letterSpacing: "0.08em", color: "#475569", marginBottom: 6,
-          paddingBottom: 4, borderBottom: "1px solid #1e293b",
+          letterSpacing: "0.08em", color: "var(--text-muted)", marginBottom: 6,
+          paddingBottom: 4, borderBottom: "1px solid var(--border)",
         }}
       >
         {title}
@@ -20,11 +20,11 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 function Row({ label, value, mono }: { label: string; value: string; mono?: boolean }) {
   return (
-    <div style={{ display: "flex", justifyContent: "space-between", padding: "3px 0", borderBottom: "1px solid #1e293b08" }}>
-      <span style={{ color: "#64748b" }}>{label}</span>
+    <div style={{ display: "flex", justifyContent: "space-between", padding: "3px 0", borderBottom: "1px solid var(--border)" }}>
+      <span style={{ color: "var(--text-muted)" }}>{label}</span>
       <span
         style={{
-          color: "#e2e8f0", fontFamily: mono ? "'JetBrains Mono',monospace" : "inherit",
+          color: "var(--text-primary)", fontFamily: mono ? "var(--font-jetbrains-mono, 'JetBrains Mono', monospace)" : "inherit",
           textAlign: "right", maxWidth: 200, overflow: "hidden",
           textOverflow: "ellipsis", whiteSpace: "nowrap",
         }}
@@ -51,25 +51,26 @@ export default function DetailPanel({ node, subnetColors, onClose, neighborSubne
     <div
       style={{
         position: "absolute", top: 0, right: 0, width: 340, height: "100%",
-        background: "#0f172a", borderLeft: "2px solid #1e293b", overflowY: "auto",
-        zIndex: 20, fontFamily: "'JetBrains Mono',monospace", fontSize: 12,
-        color: "#cbd5e1", padding: 0,
+        background: "var(--panel-bg)", borderLeft: "1px solid var(--border-strong)", overflowY: "auto",
+        zIndex: 20, fontFamily: "var(--font-jetbrains-mono, 'JetBrains Mono', monospace)", fontSize: 12,
+        color: "var(--text-secondary)", padding: 0,
+        boxShadow: "-4px 0 20px rgba(21, 50, 101, 0.08)",
       }}
     >
       {/* Header */}
       <div
         style={{
           display: "flex", justifyContent: "space-between", alignItems: "center",
-          padding: "12px 14px", background: "#1e293b", borderBottom: "1px solid #334155",
+          padding: "12px 14px", background: "#f8fafc", borderBottom: "1px solid var(--border)",
           position: "sticky", top: 0, zIndex: 2,
         }}
       >
-        <span style={{ fontWeight: 700, fontSize: 14, color: "#f1f5f9" }}>
+        <span style={{ fontWeight: 700, fontSize: 14, color: "var(--text-primary)" }}>
           {node.ne_name || node.gnb_id}
         </span>
         <button
           onClick={onClose}
-          style={{ background: "none", border: "none", color: "#94a3b8", cursor: "pointer", fontSize: 18, lineHeight: 1 }}
+          style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer", fontSize: 18, lineHeight: 1 }}
         >
           &#x2715;
         </button>
@@ -80,19 +81,19 @@ export default function DetailPanel({ node, subnetColors, onClose, neighborSubne
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
           <span
             style={{
-              padding: "2px 8px", borderRadius: 4,
-              background: subColor + "22", color: subColor,
-              border: `1px solid ${subColor}44`, fontSize: 11,
+              padding: "2px 8px", borderRadius: 6,
+              background: subColor + "15", color: subColor,
+              border: `1px solid ${subColor}33`, fontSize: 11,
             }}
           >
             {node.ip_subnet_48}
           </span>
           <span
             style={{
-              padding: "2px 8px", borderRadius: 4,
-              background: node.role === "source" ? "#ec489922" : "#33415522",
-              color: node.role === "source" ? "#EC4899" : "#94a3b8",
-              border: "1px solid " + (node.role === "source" ? "#ec489944" : "#33415566"),
+              padding: "2px 8px", borderRadius: 6,
+              background: node.role === "source" ? "#ec489915" : "#f8fafc",
+              color: node.role === "source" ? "#EC4899" : "var(--text-muted)",
+              border: "1px solid " + (node.role === "source" ? "#ec489933" : "var(--border-strong)"),
               fontSize: 11,
             }}
           >
@@ -102,8 +103,8 @@ export default function DetailPanel({ node, subnetColors, onClose, neighborSubne
             <span
               key={t}
               style={{
-                padding: "2px 8px", borderRadius: 4,
-                background: "#1e293b", border: "1px solid #334155", fontSize: 11,
+                padding: "2px 8px", borderRadius: 6,
+                background: "#f8fafc", border: "1px solid var(--border-strong)", fontSize: 11,
               }}
             >
               TAC {t}
@@ -130,10 +131,10 @@ export default function DetailPanel({ node, subnetColors, onClose, neighborSubne
                   <span
                     key={subnet}
                     style={{
-                      padding: "2px 8px", borderRadius: 4, fontSize: 11,
-                      background: c + "22", color: c,
-                      border: `1px solid ${c}44`,
-                      fontFamily: "'JetBrains Mono',monospace",
+                      padding: "2px 8px", borderRadius: 6, fontSize: 11,
+                      background: c + "15", color: c,
+                      border: `1px solid ${c}33`,
+                      fontFamily: "var(--font-jetbrains-mono, 'JetBrains Mono', monospace)",
                     }}
                   >
                     {subnet}
@@ -145,10 +146,10 @@ export default function DetailPanel({ node, subnetColors, onClose, neighborSubne
               <button
                 onClick={onFocusNeighborSubnets}
                 style={{
-                  width: "100%", padding: "5px 10px", borderRadius: 4,
-                  background: "#1e40af22", border: "1px solid #3b82f644",
-                  color: "#93c5fd", fontSize: 11, cursor: "pointer",
-                  fontFamily: "'JetBrains Mono',monospace",
+                  width: "100%", padding: "5px 10px", borderRadius: 6,
+                  background: "hsl(23 90% 54% / 0.08)", border: "1px solid hsl(23 90% 54% / 0.25)",
+                  color: "var(--klabs-accent)", fontSize: 11, cursor: "pointer",
+                  fontFamily: "var(--font-jetbrains-mono, 'JetBrains Mono', monospace)",
                 }}
               >
                 Focus on these subnets
@@ -172,15 +173,15 @@ export default function DetailPanel({ node, subnetColors, onClose, neighborSubne
               <div
                 key={i}
                 style={{
-                  padding: "6px 8px", marginBottom: 4, borderRadius: 4,
-                  background: a.severity === "Critical" ? "#dc262618" : "#f9731618",
+                  padding: "6px 8px", marginBottom: 4, borderRadius: 6,
+                  background: a.severity === "Critical" ? "#dc262610" : "#f9731610",
                   borderLeft: `3px solid ${SEVERITY_COLORS[a.severity] || "#64748b"}`,
                 }}
               >
                 <div style={{ color: SEVERITY_COLORS[a.severity] || "#64748b", fontWeight: 600, fontSize: 11 }}>
                   {a.severity} &mdash; {a.probable_cause}
                 </div>
-                <div style={{ color: "#64748b", fontSize: 10, marginTop: 2 }}>
+                <div style={{ color: "var(--text-muted)", fontSize: 10, marginTop: 2 }}>
                   {a.alarm_code} &middot; {a.alarm_time}
                 </div>
               </div>
@@ -195,13 +196,13 @@ export default function DetailPanel({ node, subnetColors, onClose, neighborSubne
                 <div
                   key={i}
                   style={{
-                    padding: "5px 7px", borderRadius: 4,
-                    background: "#1e293b", border: "1px solid #334155", fontSize: 10,
+                    padding: "5px 7px", borderRadius: 6,
+                    background: "#f8fafc", border: "1px solid var(--border)", fontSize: 10,
                   }}
                 >
-                  <div style={{ color: "#e2e8f0", fontWeight: 600 }}>Cell {c.cell_identity}</div>
-                  <div style={{ color: "#64748b" }}>PCI {c.nr_physical_cell_id}</div>
-                  <div style={{ color: "#64748b" }}>Band {c.nr_frequency_band}</div>
+                  <div style={{ color: "var(--text-primary)", fontWeight: 600 }}>Cell {c.cell_identity}</div>
+                  <div style={{ color: "var(--text-muted)" }}>PCI {c.nr_physical_cell_id}</div>
+                  <div style={{ color: "var(--text-muted)" }}>Band {c.nr_frequency_band}</div>
                 </div>
               ))}
             </div>
@@ -214,13 +215,13 @@ export default function DetailPanel({ node, subnetColors, onClose, neighborSubne
               <div
                 key={i}
                 style={{
-                  padding: "5px 7px", borderRadius: 4,
-                  background: "#1e293b", border: "1px solid #334155",
+                  padding: "5px 7px", borderRadius: 6,
+                  background: "#f8fafc", border: "1px solid var(--border)",
                   fontSize: 10, marginBottom: 4,
                 }}
               >
-                <div style={{ color: "#e2e8f0", fontWeight: 600 }}>{h.unit_type}: {h.hw_name}</div>
-                <div style={{ color: "#64748b" }}>S/N: {h.serial_number}</div>
+                <div style={{ color: "var(--text-primary)", fontWeight: 600 }}>{h.unit_type}: {h.hw_name}</div>
+                <div style={{ color: "var(--text-muted)" }}>S/N: {h.serial_number}</div>
               </div>
             ))}
           </Section>
@@ -232,15 +233,15 @@ export default function DetailPanel({ node, subnetColors, onClose, neighborSubne
               <div
                 key={i}
                 style={{
-                  padding: "5px 7px", borderRadius: 4,
-                  background: "#1e293b", border: "1px solid #334155",
+                  padding: "5px 7px", borderRadius: 6,
+                  background: "#f8fafc", border: "1px solid var(--border)",
                   fontSize: 10, marginBottom: 4,
                 }}
               >
-                <div style={{ color: s.sw_status === "ACTIVATED" ? "#10B981" : "#64748b", fontWeight: 600 }}>
+                <div style={{ color: s.sw_status === "ACTIVATED" ? "#10B981" : "var(--text-muted)", fontWeight: 600 }}>
                   {s.sw_id}
                 </div>
-                <div style={{ color: "#94a3b8" }}>{s.sw_name} v{s.sw_version}</div>
+                <div style={{ color: "var(--text-secondary)" }}>{s.sw_name} v{s.sw_version}</div>
               </div>
             ))}
           </Section>

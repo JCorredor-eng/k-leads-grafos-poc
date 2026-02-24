@@ -45,26 +45,37 @@ export default function Home() {
   }, [selectedDataset.sigma]);
 
   return (
-    <div className="flex h-screen flex-col bg-zinc-950">
-      {/* Tab bar */}
-      <nav className="flex shrink-0 items-center border-b border-zinc-800 bg-zinc-900">
+    <div className="flex h-screen flex-col" style={{ background: "var(--background)" }}>
+      {/* Navbar — glassmorphism */}
+      <nav
+        style={{
+          display: "flex", alignItems: "center", flexShrink: 0,
+          background: "var(--navbar-bg)",
+          backdropFilter: "var(--navbar-blur)",
+          WebkitBackdropFilter: "var(--navbar-blur)",
+          borderBottom: "1px solid var(--navbar-border)",
+        }}
+      >
         {TABS.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-6 py-3 text-sm font-medium transition-colors ${
-              activeTab === tab.id
-                ? "border-b-2 border-blue-500 text-white"
-                : "text-zinc-400 hover:text-zinc-200"
-            }`}
+            style={{
+              padding: "12px 24px", fontSize: 14, fontWeight: activeTab === tab.id ? 600 : 400,
+              borderBottom: activeTab === tab.id ? "2px solid var(--klabs-accent)" : "2px solid transparent",
+              color: activeTab === tab.id ? "var(--text-primary)" : "var(--text-muted)",
+              background: "transparent", border: "none", borderBottomStyle: "solid",
+              cursor: "pointer", transition: "all 0.2s",
+              fontFamily: "var(--font-sora, 'Sora', sans-serif)",
+            }}
           >
             {tab.label}
           </button>
         ))}
 
-        {/* Dataset selector for active tab */}
-        <div className="ml-auto flex items-center gap-2 px-4">
-          <label htmlFor="dataset-select" className="text-xs text-zinc-400">
+        {/* Dataset selector */}
+        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 8, padding: "0 16px" }}>
+          <label htmlFor="dataset-select" style={{ fontSize: 12, color: "var(--text-muted)" }}>
             Dataset:
           </label>
           <select
@@ -76,7 +87,12 @@ export default function Home() {
                 [activeTab]: e.target.value,
               }))
             }
-            className="rounded border border-zinc-700 bg-zinc-800 px-3 py-1.5 text-sm text-zinc-200 outline-none focus:border-blue-500"
+            style={{
+              borderRadius: 6, border: "1px solid var(--border-strong)",
+              background: "var(--surface)", padding: "6px 12px",
+              fontSize: 13, color: "var(--text-primary)", outline: "none",
+              fontFamily: "var(--font-sora, 'Sora', sans-serif)",
+            }}
           >
             {DATASETS.map((ds) => (
               <option key={ds.id} value={ds.id}>

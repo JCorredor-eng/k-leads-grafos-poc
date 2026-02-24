@@ -66,13 +66,13 @@ export default function SigmaGraphInner({
   return (
     <div
       style={{
-        width: "100%", height: "100%", background: "#0a0f1a",
+        width: "100%", height: "100%", background: "var(--canvas-bg)",
         position: "relative", overflow: "hidden",
-        fontFamily: "system-ui,-apple-system,sans-serif",
+        fontFamily: "var(--font-sora, 'Sora', sans-serif)",
       }}
     >
       <SigmaContainer
-        style={{ height: "100%", width: "100%", background: "#09090b" }}
+        style={{ height: "100%", width: "100%", background: "#f1f5f9" }}
         settings={{
           ...SIGMA_SETTINGS,
           renderEdgeLabels: config.labels.showEdgeLabels ?? false,

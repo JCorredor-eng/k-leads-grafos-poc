@@ -44,12 +44,14 @@ export default function SubnetFilters({
       {onSearchChange && (
         <div
           style={{
-            background: "#0f172acc", backdropFilter: "blur(8px)",
-            borderRadius: 8, border: "1px solid " + (searchTerm ? "#3b82f644" : "#1e293b"),
+            background: "var(--surface-glass)", backdropFilter: "blur(16px) saturate(180%)",
+            WebkitBackdropFilter: "blur(16px) saturate(180%)",
+            borderRadius: 10, border: "1px solid " + (searchTerm ? "hsl(23 90% 54% / 0.3)" : "var(--border)"),
             padding: "8px 10px", display: "flex", flexDirection: "column", gap: 4,
+            boxShadow: "var(--panel-shadow)",
           }}
         >
-          <span style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "#475569", marginBottom: 2 }}>
+          <span style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-muted)", marginBottom: 2 }}>
             Search nodes
           </span>
           <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
@@ -59,9 +61,9 @@ export default function SubnetFilters({
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder="Name or ID…"
               style={{
-                flex: 1, background: "#1e293b", border: "1px solid #334155",
-                borderRadius: 4, padding: "4px 8px", color: "#e2e8f0",
-                fontSize: 11, fontFamily: "'JetBrains Mono',monospace",
+                flex: 1, background: "var(--background)", border: "1px solid var(--border-strong)",
+                borderRadius: 6, padding: "4px 8px", color: "var(--text-primary)",
+                fontSize: 11, fontFamily: "var(--font-jetbrains-mono, 'JetBrains Mono', monospace)",
                 outline: "none", minWidth: 0,
               }}
             />
@@ -69,8 +71,8 @@ export default function SubnetFilters({
               <button
                 onClick={() => onSearchChange("")}
                 style={{
-                  background: "#334155", border: "none", borderRadius: 4,
-                  color: "#94a3b8", cursor: "pointer", padding: "2px 6px",
+                  background: "var(--border-strong)", border: "none", borderRadius: 4,
+                  color: "var(--text-muted)", cursor: "pointer", padding: "2px 6px",
                   fontSize: 12, lineHeight: 1, flexShrink: 0,
                 }}
               >
@@ -79,7 +81,7 @@ export default function SubnetFilters({
             )}
           </div>
           {searchTerm && matchedNodeCount != null && (
-            <span style={{ fontSize: 9, color: matchedNodeCount > 0 ? "#3b82f6" : "#ef4444" }}>
+            <span style={{ fontSize: 9, color: matchedNodeCount > 0 ? "var(--klabs-accent)" : "#ef4444" }}>
               {matchedNodeCount > 0 ? `${matchedNodeCount} match${matchedNodeCount === 1 ? "" : "es"}` : "No matches"}
             </span>
           )}
@@ -87,12 +89,14 @@ export default function SubnetFilters({
       )}
       <div
         style={{
-          background: "#0f172acc", backdropFilter: "blur(8px)",
-          borderRadius: 8, border: "1px solid #1e293b",
+          background: "var(--surface-glass)", backdropFilter: "blur(16px) saturate(180%)",
+          WebkitBackdropFilter: "blur(16px) saturate(180%)",
+          borderRadius: 10, border: "1px solid var(--border)",
           padding: "8px 10px", display: "flex", flexDirection: "column", gap: 4,
+          boxShadow: "var(--panel-shadow)",
         }}
       >
-        <span style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "#475569", marginBottom: 2 }}>
+        <span style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-muted)", marginBottom: 2 }}>
           Subnets
         </span>
         {subnetKeys.map((s) => {
@@ -104,19 +108,19 @@ export default function SubnetFilters({
               onClick={() => onToggleSubnet(s)}
               style={{
                 display: "flex", alignItems: "center", gap: 6,
-                background: activeSubnets.has(s) ? "#1e293b" : "transparent",
-                border: "1px solid " + (activeSubnets.has(s) ? color + "44" : "#1e293b"),
-                borderRadius: 4, padding: "3px 8px", cursor: "pointer",
+                background: activeSubnets.has(s) ? color + "12" : "transparent",
+                border: "1px solid " + (activeSubnets.has(s) ? color + "33" : "var(--border)"),
+                borderRadius: 6, padding: "3px 8px", cursor: "pointer",
                 transition: "all 0.15s",
               }}
             >
-              <div style={{ width: 8, height: 8, borderRadius: "50%", background: activeSubnets.has(s) ? color : color + "33" }} />
-              <span style={{ fontSize: 10, color: activeSubnets.has(s) ? "#e2e8f0" : "#475569", fontFamily: "'JetBrains Mono',monospace" }}>
+              <div style={{ width: 8, height: 8, borderRadius: "50%", background: activeSubnets.has(s) ? color : color + "44" }} />
+              <span style={{ fontSize: 10, color: activeSubnets.has(s) ? "var(--text-primary)" : "var(--text-muted)", fontFamily: "var(--font-jetbrains-mono, 'JetBrains Mono', monospace)" }}>
                 {subnetLabel(s)}
               </span>
-              <span style={{ fontSize: 9, color: "#475569", marginLeft: "auto" }}>{count}</span>
+              <span style={{ fontSize: 9, color: "var(--text-faint)", marginLeft: "auto" }}>{count}</span>
               {neighborSubnets?.has(s) && (
-                <div style={{ width: 6, height: 6, borderRadius: "50%", border: "2px solid #3b82f6", marginLeft: 4, flexShrink: 0 }} />
+                <div style={{ width: 6, height: 6, borderRadius: "50%", border: "2px solid var(--klabs-accent)", marginLeft: 4, flexShrink: 0 }} />
               )}
             </button>
           );
@@ -126,14 +130,14 @@ export default function SubnetFilters({
             onClick={isFocusedOnNeighbors ? onResetSubnets : onFocusNeighborSubnets}
             style={{
               display: "flex", alignItems: "center", gap: 6,
-              background: isFocusedOnNeighbors ? "#1e40af22" : "transparent",
-              border: "1px solid " + (isFocusedOnNeighbors ? "#3b82f666" : "#1e293b"),
-              borderRadius: 4, padding: "4px 8px", cursor: "pointer",
+              background: isFocusedOnNeighbors ? "hsl(23 90% 54% / 0.08)" : "transparent",
+              border: "1px solid " + (isFocusedOnNeighbors ? "hsl(23 90% 54% / 0.25)" : "var(--border)"),
+              borderRadius: 6, padding: "4px 8px", cursor: "pointer",
               transition: "all 0.15s", marginTop: 2,
             }}
           >
-            <div style={{ width: 8, height: 8, borderRadius: "50%", background: isFocusedOnNeighbors ? "#3b82f6" : "#334155" }} />
-            <span style={{ fontSize: 10, color: isFocusedOnNeighbors ? "#93c5fd" : "#94a3b8" }}>
+            <div style={{ width: 8, height: 8, borderRadius: "50%", background: isFocusedOnNeighbors ? "var(--klabs-accent)" : "var(--border-strong)" }} />
+            <span style={{ fontSize: 10, color: isFocusedOnNeighbors ? "var(--klabs-accent)" : "var(--text-muted)" }}>
               {isFocusedOnNeighbors ? "Show all subnets" : "Focus neighbor subnets"}
             </span>
           </button>
@@ -142,18 +146,27 @@ export default function SubnetFilters({
       <button
         onClick={onToggleAlarmsOnly}
         style={{
-          background: showAlarmsOnly ? "#DC262622" : "#0f172acc",
-          backdropFilter: "blur(8px)",
-          border: "1px solid " + (showAlarmsOnly ? "#DC262666" : "#1e293b"),
-          borderRadius: 8, padding: "6px 10px", cursor: "pointer",
+          background: showAlarmsOnly ? "#DC262612" : "var(--surface-glass)",
+          backdropFilter: "blur(16px) saturate(180%)",
+          WebkitBackdropFilter: "blur(16px) saturate(180%)",
+          border: "1px solid " + (showAlarmsOnly ? "#DC262633" : "var(--border)"),
+          borderRadius: 10, padding: "6px 10px", cursor: "pointer",
           display: "flex", alignItems: "center", gap: 6,
+          boxShadow: "var(--panel-shadow)",
         }}
       >
-        <div style={{ width: 8, height: 8, borderRadius: "50%", background: showAlarmsOnly ? "#DC2626" : "#334155" }} />
-        <span style={{ fontSize: 10, color: showAlarmsOnly ? "#DC2626" : "#94a3b8" }}>Alarms only</span>
+        <div style={{ width: 8, height: 8, borderRadius: "50%", background: showAlarmsOnly ? "#DC2626" : "var(--border-strong)" }} />
+        <span style={{ fontSize: 10, color: showAlarmsOnly ? "#DC2626" : "var(--text-muted)" }}>Alarms only</span>
       </button>
-      <div style={{ background: "#0f172acc", backdropFilter: "blur(8px)", borderRadius: 8, border: "1px solid #1e293b", padding: "6px 10px" }}>
-        <span style={{ fontSize: 9, color: "#475569" }}>
+      <div
+        style={{
+          background: "var(--surface-glass)", backdropFilter: "blur(16px) saturate(180%)",
+          WebkitBackdropFilter: "blur(16px) saturate(180%)",
+          borderRadius: 10, border: "1px solid var(--border)", padding: "6px 10px",
+          boxShadow: "var(--panel-shadow)",
+        }}
+      >
+        <span style={{ fontSize: 9, color: "var(--text-muted)" }}>
           Showing {visibleNodeCount}/{totalNodeCount} nodes &middot; {visibleEdgeCount} edges
         </span>
       </div>

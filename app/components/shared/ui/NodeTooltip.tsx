@@ -13,15 +13,17 @@ export default function NodeTooltip({ node, position, subnetColors }: NodeToolti
     <div
       style={{
         position: "absolute", left: position.x + 14, top: position.y - 10,
-        background: "#1e293bee", backdropFilter: "blur(8px)",
-        border: "1px solid #334155", borderRadius: 6, padding: "8px 12px",
+        background: "var(--surface-glass)", backdropFilter: "blur(16px) saturate(180%)",
+        WebkitBackdropFilter: "blur(16px) saturate(180%)",
+        border: "1px solid var(--border-strong)", borderRadius: 8, padding: "8px 12px",
         zIndex: 15, pointerEvents: "none", maxWidth: 240,
+        boxShadow: "var(--panel-shadow)",
       }}
     >
-      <div style={{ fontWeight: 700, color: "#f1f5f9", fontSize: 12, marginBottom: 3 }}>
+      <div style={{ fontWeight: 700, color: "var(--text-primary)", fontSize: 12, marginBottom: 3 }}>
         {node.ne_name || node.gnb_id}
       </div>
-      <div style={{ fontSize: 10, color: "#94a3b8", display: "flex", flexDirection: "column", gap: 2 }}>
+      <div style={{ fontSize: 10, color: "var(--text-muted)", display: "flex", flexDirection: "column", gap: 2 }}>
         <span>
           Subnet: <span style={{ color: subnetColors[node.ip_subnet_48] }}>{node.ip_subnet_48}</span>
         </span>
@@ -31,7 +33,7 @@ export default function NodeTooltip({ node, position, subnetColors }: NodeToolti
             {node.alarms?.[0]?.severity}: {node.alarms?.[0]?.probable_cause}
           </span>
         )}
-        <span style={{ color: "#475569", fontSize: 9, marginTop: 2 }}>Click for details</span>
+        <span style={{ color: "var(--text-faint)", fontSize: 9, marginTop: 2 }}>Click for details</span>
       </div>
     </div>
   );

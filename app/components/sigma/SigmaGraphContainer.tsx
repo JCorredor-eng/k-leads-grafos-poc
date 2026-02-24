@@ -7,7 +7,7 @@ import type { NetworkGraphData } from "@/app/types/network-graph";
 const SigmaGraphInner = dynamic(() => import("./SigmaGraphInner"), {
   ssr: false,
   loading: () => (
-    <div className="flex h-full items-center justify-center text-zinc-500">
+    <div className="flex h-full items-center justify-center" style={{ color: "var(--text-muted)" }}>
       Loading graph...
     </div>
   ),

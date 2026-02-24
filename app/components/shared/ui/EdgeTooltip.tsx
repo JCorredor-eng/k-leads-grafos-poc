@@ -13,13 +13,15 @@ export default function EdgeTooltip({ edge, position, nodeMap, subnetColors }: E
     <div
       style={{
         position: "absolute", left: position.x + 14, top: position.y - 10,
-        background: "#1e293bee", backdropFilter: "blur(8px)",
-        border: "1px solid #334155", borderRadius: 6, padding: "8px 12px",
+        background: "var(--surface-glass)", backdropFilter: "blur(16px) saturate(180%)",
+        WebkitBackdropFilter: "blur(16px) saturate(180%)",
+        border: "1px solid var(--border-strong)", borderRadius: 8, padding: "8px 12px",
         zIndex: 15, pointerEvents: "none",
+        boxShadow: "var(--panel-shadow)",
       }}
     >
-      <div style={{ fontSize: 10, color: "#94a3b8", display: "flex", flexDirection: "column", gap: 2 }}>
-        <span style={{ color: "#e2e8f0", fontWeight: 600 }}>
+      <div style={{ fontSize: 10, color: "var(--text-muted)", display: "flex", flexDirection: "column", gap: 2 }}>
+        <span style={{ color: "var(--text-primary)", fontWeight: 600 }}>
           {nodeMap[edge.source]?.ne_name || edge.source} &rarr; {nodeMap[edge.target]?.ne_name || edge.target}
         </span>
         <span>Cell relations: {edge.weight}</span>

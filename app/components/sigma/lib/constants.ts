@@ -15,16 +15,16 @@ export const BorderedNodeProgram = createNodeBorderProgram({
   ],
 });
 
-/** Default Sigma container settings */
+/** Default Sigma container settings — K-Labs light theme */
 export const SIGMA_SETTINGS: Partial<Settings> = {
-  defaultNodeColor: "#94A3B8",
-  defaultEdgeColor: "#475569",
+  defaultNodeColor: "#64748b",
+  defaultEdgeColor: "#cbd5e1",
   defaultNodeType: "bordered",
   nodeProgramClasses: {
     bordered: BorderedNodeProgram,
   },
   labelSize: 12,
-  labelColor: { color: "#e4e4e7" },
+  labelColor: { color: "#334155" },
   labelFont: "inherit",
   hideEdgesOnMove: true,
   enableEdgeEvents: true,
@@ -32,4 +32,4 @@ export const SIGMA_SETTINGS: Partial<Settings> = {
 };
 
 /** Color applied to dimmed (non-neighbor) nodes on hover */
-export const DIMMED_NODE_COLOR = "#2a2a2a";
+export const DIMMED_NODE_COLOR = "#e2e8f0";

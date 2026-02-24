@@ -60,9 +60,9 @@ export default function NetworkGraph({ data }: { data: NetworkGraphData }) {
   return (
     <div
       style={{
-        width: "100%", height: "100%", background: "#0a0f1a",
+        width: "100%", height: "100%", background: "var(--canvas-bg)",
         position: "relative", overflow: "hidden",
-        fontFamily: "system-ui,-apple-system,sans-serif",
+        fontFamily: "var(--font-sora, 'Sora', sans-serif)",
       }}
     >
       <GraphHeader alarmContext={data.metadata.alarm_context} totalNodes={data.metadata.total_nodes} />

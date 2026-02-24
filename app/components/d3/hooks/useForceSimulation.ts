@@ -102,7 +102,7 @@ export default function useForceSimulation({
     // ----- Edges -----
     const linkSel = g.append("g").selectAll<SVGLineElement, SimLink>("line")
       .data(links).join("line")
-      .attr("stroke", (d) => (subnetColors[d.transport.ip_subnet_48] || "#334155") + "66")
+      .attr("stroke", (d) => (subnetColors[d.transport.ip_subnet_48] || "#94a3b8") + "88")
       .attr("stroke-width", (d) => d.thickness ?? Math.max(1, d.weight / 4))
       .attr("stroke-dasharray", (d) => (d.has_radio_config && d.has_transport_config) ? "none" : "4 3")
       .style("cursor", "pointer")
@@ -115,13 +115,13 @@ export default function useForceSimulation({
         if (original) callbacks.onHoverEdge(original);
         callbacks.onMouseMove({ x: evt.offsetX, y: evt.offsetY });
         d3.select(this)
-          .attr("stroke", subnetColors[d.transport.ip_subnet_48] || "#64748b")
+          .attr("stroke", subnetColors[d.transport.ip_subnet_48] || "#94a3b8")
           .attr("stroke-width", d.thickness != null ? d.thickness * 1.5 : Math.max(2, d.weight / 3));
       })
       .on("mouseleave", function (_evt: MouseEvent, d) {
         callbacks.onHoverEdge(null);
         d3.select(this)
-          .attr("stroke", (subnetColors[d.transport.ip_subnet_48] || "#334155") + "66")
+          .attr("stroke", (subnetColors[d.transport.ip_subnet_48] || "#94a3b8") + "88")
           .attr("stroke-width", d.thickness ?? Math.max(1, d.weight / 4));
       });
 
@@ -146,7 +146,7 @@ export default function useForceSimulation({
         const base = subnetColors[d.ip_subnet_48] || "#64748b";
         return d.has_active_alarms ? base : base + "44";
       })
-      .attr("stroke", (d) => d.role === "source" ? "#f1f5f9" : "none")
+      .attr("stroke", (d) => d.role === "source" ? "#0f172a" : "none")
       .attr("stroke-width", (d) => d.role === "source" ? 2.5 : 0)
       .attr("opacity", 0.9);
 
@@ -155,17 +155,17 @@ export default function useForceSimulation({
       .text((d) => (d.ne_name || d.gnb_id).replace("MGY-S", "S"))
       .attr("dy", (d) => getNodeRadius(d) + 12)
       .attr("text-anchor", "middle")
-      .attr("fill", "#94a3b8")
+      .attr("fill", "#475569")
       .attr("font-size", (d) => d.role === "source" ? 11 : 9)
-      .attr("font-family", "system-ui, sans-serif")
+      .attr("font-family", "'Sora', system-ui, sans-serif")
       .attr("font-weight", (d) => d.role === "source" ? 700 : 400);
 
     // Cell-count badge for nodes with 4+ cells
     nodeGroup.filter((d) => d.n_cells >= 4).append("text")
       .text((d) => String(d.n_cells))
       .attr("dy", 4).attr("text-anchor", "middle")
-      .attr("fill", "#f1f5f9").attr("font-size", 10)
-      .attr("font-weight", 700).attr("font-family", "system-ui, sans-serif");
+      .attr("fill", "#0f172a").attr("font-size", 10)
+      .attr("font-weight", 700).attr("font-family", "'Sora', system-ui, sans-serif");
 
     // Star for source node
     nodeGroup.filter((d) => d.role === "source").append("text")
